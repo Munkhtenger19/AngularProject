@@ -1,0 +1,9 @@
+<div class="group" (click)="showTasks()">
+    <div class="group-header">{{ group.name }}</div>
+    <div class="group-body">
+      <div class="group-progress">
+        <mat-progress-bar [value]="group.completed / group.total"></mat-progress-bar>
+      </div>
+      <div class="group-count">{{ group.completed }} / {{ group.total }} tasks completed</div>
+    </div>
+  </div>
