@@ -1,1 +1,165 @@
-<p>home works!</p>
+<!-- <table>
+  <thead>
+    <tr>
+      <th>Group Name</th>
+      <th>Task Name</th>
+      <th>Description</th>
+      <th>Completed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let group of groups; let i = index">
+      <tr>
+        <td [attr.rowspan]="group.tasks.length + 1">{{ group.name }}</td>
+      </tr>
+      <ng-container *ngFor="let task of group.tasks">
+        <tr>
+          <td>{{ task.name }}</td>
+          <td>{{ task.description }}</td>
+          <td>{{ task.completed ? "Yes" : "No" }}</td>
+        </tr>
+      </ng-container>
+      <tr>
+        <td>
+          <button (click)="addTask(i)">Add Task</button>
+        </td>
+        <td colspan="2"></td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
+<form (ngSubmit)="onSubmit()">
+    <label>
+      Group Name:
+      <input type="text" [(ngModel)]="newGroup.name" name="groupName" required>
+    </label>
+    <button type="submit">Add Group</button>
+  </form>
+  
+  <form *ngIf="selectedGroup" (ngSubmit)="onSubmitTask()">
+    <label>
+      Task Name:
+      <input type="text" [(ngModel)]="newTask.name" name="taskName" required>
+    </label>
+    <label>
+      Description:
+      <textarea [(ngModel)]="newTask.description" name="taskDescription" required></textarea>
+    </label>
+    <button type="submit">Add Task</button>
+  </form> -->
+
+<!-- <div
+  class="modal fade"
+  id="tasksModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="tasksModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="tasksModalLabel">
+          {{ selectedGroup?.name || "No" }} Tasks
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let task of selectedGroup?.tasks">
+            {{ task.name }} - {{ task.dueDate | date }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- <div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">...</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngFor="let group of groups" class="group-card">
+  <div class="group-header">
+    <h3>{{ group.name }}</h3>
+    <p>
+      {{ getCompletedTasks(group) }} / {{ group.tasks.length }} tasks completed
+    </p>
+  </div>
+  <mat-progress-bar
+    mode="determinate"
+    [value]="(getCompletedTasks(group) / group.tasks.length) * 100"
+  ></mat-progress-bar>
+  <button
+    class="btn btn-primary"
+    data-toggle="modal"
+    data-target="#exampleModal"
+    (click)="selectedGroup = group; handleClick()"
+  >
+    here
+  </button>
+</div> -->
+
+<div *ngFor="let group of groups" class="group-card">
+  <div class="title group-header">
+    <h3>{{ group.name }}</h3>
+    <p>
+      {{ getCompletedTasks(group) }} / {{ group.tasks.length }} tasks completed
+    </p>
+  </div>
+  <mat-progress-bar
+    mode="determinate"
+    [value]="(getCompletedTasks(group) / group.tasks.length) * 100"
+    color="warn"
+  ></mat-progress-bar>
+  <button
+    mat-raised-button
+    class="btn btn-primary myBtn"
+    (click)="openDialog(group)"
+  >
+    View
+  </button>
+</div>
+<div class="calendar-container">
+  <mwl-calendar
+    [view]="view"
+    [viewDate]="viewDate"
+    [events]="events"
+    [activeDayIsOpen]="activeDayIsOpen"
+    (dayClicked)="dayClicked($event.day)"
+  ></mwl-calendar>
+</div>

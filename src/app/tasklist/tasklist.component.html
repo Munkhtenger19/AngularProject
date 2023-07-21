@@ -1,0 +1,14 @@
+<h2>{{ group.name }} tasks</h2>
+<mat-list>
+  <mat-list-item *ngFor="let task of tasks">
+    <div mat-list-avatar></div>
+    <div mat-line>{{ task.name }}</div>
+    <div mat-line class="task-description">{{ task.description }}</div>
+    <div mat-list-avatar>
+      <mat-icon>{{ task.completed ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+    </div>
+  </mat-list-item>
+</mat-list>
+<mat-dialog-actions>
+  <button mat-button (click)="close()">Close</button>
+</mat-dialog-actions>

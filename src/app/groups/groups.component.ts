@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-groups',
@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./groups.component.scss']
 })
 export class GroupsComponent {
-
+  @Input() group: any;
+  showTasks() {
+    console.log('Show tasks for group:', this.group.name);
+  }
 }

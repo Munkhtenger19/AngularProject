@@ -1,0 +1,98 @@
+<h2 mat-dialog-title>{{ data.group.name }}</h2>
+<mat-dialog-content>
+  <form #taskForm="ngForm" (ngSubmit)="onSave()">
+    <div class="form-group">
+      <label for="name">Task Name *</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        [(ngModel)]="newTask['name']"
+        required
+        #name="ngModel"
+      />
+      <small
+        id="name"
+        class="form-text text-danger"
+        *ngIf="taskForm.submitted && name.invalid"
+      >
+        Please enter a task name.
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label for="priority">Priority</label>
+      <select
+        class="form-control"
+        id="priority"
+        name="priority"
+        [(ngModel)]="newTask['priority']"
+      >
+        <option value="">--</option>
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="dueDate">Due Date</label>
+      <input
+        type="date"
+        class="form-control"
+        id="dueDate"
+        name="dueDate"
+        [(ngModel)]="newTask['dueDate']"
+      />
+    </div>
+    <mat-dialog-actions
+    class="mat-dialog-actions"
+    style="display: flex; justify-content: flex-end; align-items: flex-end"
+  >
+    <button mat-button type="submit" [disabled]="!name.valid">Save</button>
+    <button mat-button [mat-dialog-close]="true">Cancel</button>
+  </mat-dialog-actions>
+  </form>
+</mat-dialog-content>
+
+<hr />
+<mat-dialog-content>
+  <table class="mat-table" style="width: 100%">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Priority</th>
+        <th>Due Date</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of data.group.tasks">
+        <td>
+          <!-- Add a new column for the checkbox icon -->
+          <button mat-icon-button (click)="toggleComplete(task)">
+            <mat-icon>{{
+              task.completed ? "check_box" : "check_box_outline_blank"
+            }}</mat-icon>
+          </button>
+        </td>
+
+        <td>{{ task.name }}</td>
+        <td>{{ task.priority || "None" }}</td>
+        <td>{{ task.dueDate ? (task.dueDate | date) : "None" }}</td>
+        <td>
+          <button mat-icon-button color="warn" (click)="deleteTask(task)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</mat-dialog-content>
+<mat-dialog-actions
+  class="mat-dialog-actions"
+  style="display: flex; justify-content: flex-end; align-items: flex-end"
+>
+  <button mat-button [mat-dialog-close]="true">OK</button>
+</mat-dialog-actions>
