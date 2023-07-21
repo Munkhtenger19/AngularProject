@@ -48,3 +48,19 @@
 .myBtn {
   margin-top: 15px;
 }
+.group-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  max-width: 65%;
+  overflow-y: auto;
+  max-height: 600px;
+}
+.btnGroup{
+  margin-top: 20px;
+  margin-left: 60px;
+  background-color: #f06868;
+  :hover{
+    background-color: #f06868;
+  }
+}

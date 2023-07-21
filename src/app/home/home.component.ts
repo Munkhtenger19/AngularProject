@@ -4,7 +4,8 @@ import { TasklistComponent } from '../tasklist/tasklist.component';
 import { GroupService, Group, Task } from '../Group.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TasksDialogComponent } from '../tasks-dialog/tasks-dialog.component';
-import { CalendarView, CalendarEvent } from 'angular-calendar';
+import { CalendarView, CalendarEvent, CalendarModule } from 'angular-calendar';
+import { NewGroupDialogComponent } from '../new-group-dialog/new-group-dialog.component';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -129,6 +130,9 @@ export class HomeComponent implements OnInit {
     name: '',
     tasks: [],
   };
+  view: CalendarView = CalendarView.Month;
+  viewDate: Date = new Date();
+  events: any[] = [];
 
   constructor(private groupService: GroupService,private dialog: MatDialog) {}
 
@@ -194,4 +198,30 @@ export class HomeComponent implements OnInit {
   // onCloseModal() {
   //   this.tasksModal.nativeElement.style.display = 'block';
   // }
+
+  openNewGroupDialog() {
+    const dialogRef = this.dialog.open(NewGroupDialogComponent, {
+      width: '400px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const newGroup: Group = {
+          id: Math.floor(Math.random() * 10) + 1,
+          name: result,
+          tasks: []
+        };
+        this.groupService.addGroup(newGroup); // Save the new group to the GroupService
+        this.groups = this.groupService.getGroups(); // Update the list of groups
+      }
+    });
+    console.log('New group added:', this.newGroup);
+  }
+  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+    console.log('Day clicked', date);
+
+    if (events.length > 0) {
+      console.log('Events', events);
+    }
+  }
 }

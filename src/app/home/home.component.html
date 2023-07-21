@@ -133,28 +133,40 @@
     here
   </button>
 </div> -->
-
-<div *ngFor="let group of groups" class="group-card">
-  <div class="title group-header">
-    <h3>{{ group.name }}</h3>
-    <p>
-      {{ getCompletedTasks(group) }} / {{ group.tasks.length }} tasks completed
-    </p>
+<button mat-raised-button class class="btnGroup" (click)="openNewGroupDialog()">
+  New Group
+</button>
+<div class="group-list">
+  <div *ngFor="let group of groups" class="group-card">
+    <div class="title group-header">
+      <h3>{{ group.name }}</h3>
+      <p>
+        {{ getCompletedTasks(group) }} / {{ group.tasks.length }} tasks
+        completed
+      </p>
+    </div>
+    <mat-progress-bar
+      mode="determinate"
+      [value]="(getCompletedTasks(group) / group.tasks.length) * 100"
+      color="warn"
+    ></mat-progress-bar>
+    <button
+      mat-raised-button
+      class="btn btn-primary myBtn"
+      (click)="openDialog(group)"
+    >
+      View
+    </button>
   </div>
-  <mat-progress-bar
-    mode="determinate"
-    [value]="(getCompletedTasks(group) / group.tasks.length) * 100"
-    color="warn"
-  ></mat-progress-bar>
-  <button
-    mat-raised-button
-    class="btn btn-primary myBtn"
-    (click)="openDialog(group)"
-  >
-    View
-  </button>
 </div>
-<div class="calendar-container">
+<div>
+<mwl-calendar-month-view
+  [viewDate]="viewDate"
+  [events]="events"
+  (dayClicked)="dayClicked($event.day)"
+></mwl-calendar-month-view>
+</div>
+<!-- <div class="calendar-container">
   <mwl-calendar
     [view]="view"
     [viewDate]="viewDate"
@@ -162,4 +174,4 @@
     [activeDayIsOpen]="activeDayIsOpen"
     (dayClicked)="dayClicked($event.day)"
   ></mwl-calendar>
-</div>
+</div> -->

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+import { v4 as uuidv4 } from 'uuid';
 
 export interface Group {
   id: number;
@@ -65,6 +65,7 @@ export class GroupService {
   // JSON.parse(localStorage.getItem('group') || '[]');
 
   constructor() {
+    this.groups = JSON.parse(localStorage.getItem('groups') || '[]');
   }
 
   getGroups(): Group[] {
@@ -77,8 +78,8 @@ export class GroupService {
   }
 
   addTask(groupIndex: number, task: Task) {
-
-    this.groups[groupIndex].tasks.push(task);
+    const groupX = this.groups.findIndex(group => group.id === groupIndex);
+    this.groups[groupX].tasks.push(task);
     localStorage.setItem('groups', JSON.stringify(this.groups));
   }
   getTasks(): Task[] {

@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { GroupsComponent } from './groups/groups.component';
 import { CalendarComponent } from './calendar/calendar.component';
-import { CalendarModule } from 'angular-calendar';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatNavList} from '@angular/material/list';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -27,7 +27,11 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
 import { TasksDialogComponent } from './tasks-dialog/tasks-dialog.component';
-
+import { EdittaskdialogComponent } from './edittaskdialog/edittaskdialog.component';
+import { MatSelectModule } from '@angular/material/select';
+import { NewGroupDialogComponent } from './new-group-dialog/new-group-dialog.component';
+import { v4 as uuidv4 } from 'uuid';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +41,9 @@ import { TasksDialogComponent } from './tasks-dialog/tasks-dialog.component';
     TasksComponent,
     HomeComponent,
     TasklistComponent,
-    TasksDialogComponent
+    TasksDialogComponent,
+    EdittaskdialogComponent,
+    NewGroupDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +63,11 @@ import { TasksDialogComponent } from './tasks-dialog/tasks-dialog.component';
     MatInputModule,
     MatFormFieldModule,
     MatNativeDateModule,
-    CalendarModule
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

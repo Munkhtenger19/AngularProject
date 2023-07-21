@@ -34,7 +34,7 @@ export class TasksDialogComponent {
       console.log(task);
       console.log(this.data.group.id);
       this.groupService.addTask(this.data.group.id, task);
-      this.data.group.tasks.push(task);
+      // this.data.group.tasks.push(task);
       console.log('New task added:', task);
     
     }
