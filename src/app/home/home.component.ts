@@ -171,6 +171,7 @@ export class HomeComponent implements OnInit {
       group: this.selectedGroup.id,
       completed: false,
     });
+
   }
   handleClick() {
     console.log('Clicked');
@@ -189,15 +190,6 @@ export class HomeComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
-  // onOpenModal(group: Group) {
-  //   this.selectedGroup = group;
-  //   if (this.tasksModal) {
-  //     this.tasksModal.nativeElement.style.display = 'none';
-  //   }
-  // }
-  // onCloseModal() {
-  //   this.tasksModal.nativeElement.style.display = 'block';
-  // }
 
   openNewGroupDialog() {
     const dialogRef = this.dialog.open(NewGroupDialogComponent, {
@@ -211,8 +203,8 @@ export class HomeComponent implements OnInit {
           name: result,
           tasks: []
         };
-        this.groupService.addGroup(newGroup); // Save the new group to the GroupService
-        this.groups = this.groupService.getGroups(); // Update the list of groups
+        this.groupService.addGroup(newGroup); 
+        this.groups = this.groupService.getGroups(); 
       }
     });
     console.log('New group added:', this.newGroup);

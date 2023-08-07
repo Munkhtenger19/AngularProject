@@ -1,4 +1,9 @@
-<h2 mat-dialog-title>{{ data.group.name }}</h2>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+  <h2 mat-dialog-title>Group: {{ data.group.name }}</h2>
+  <button deleteGroupButton mat-button color="warn" (click)="deleteGroup()">
+    Delete Group
+  </button>
+</div>
 <mat-dialog-content>
   <form #taskForm="ngForm" (ngSubmit)="onSave()">
     <div class="form-group">
@@ -46,12 +51,12 @@
       />
     </div>
     <mat-dialog-actions
-    class="mat-dialog-actions"
-    style="display: flex; justify-content: flex-end; align-items: flex-end"
-  >
-    <button mat-button type="submit" [disabled]="!name.valid">Save</button>
-    <button mat-button [mat-dialog-close]="true">Cancel</button>
-  </mat-dialog-actions>
+      class="mat-dialog-actions"
+      style="display: flex; justify-content: flex-end; align-items: flex-end"
+    >
+      <button mat-button type="submit" [disabled]="!name.valid">Save</button>
+      <button mat-button [mat-dialog-close]="true">Cancel</button>
+    </mat-dialog-actions>
   </form>
 </mat-dialog-content>
 

@@ -1,127 +1,13 @@
 
 
 <div class="container">
-  <!-- <form>
-    <div class="form-group">
-      <label for="task">Task</label>
-      <input
-        type="text"
-        class="form-control"
-        id="task"
-        placeholder="Enter task description"
-      />
-    </div>
-    <small id="task" class="form-text text-danger">Required field</small>
-    <div>
-      <div class="form-check form-check-inline">
-        <input
-          class="form-check-input"
-          type="radio"
-          name="inlineRadioOptions"
-          id="inlineRadio1"
-          value="option1"
-        />
-        <label class="form-check-label" for="inlineRadio1">Low</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input
-          class="form-check-input"
-          type="radio"
-          name="inlineRadioOptions"
-          id="inlineRadio2"
-          value="option2"
-        />
-        <label class="form-check-label" for="inlineRadio2">Medium</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input
-          class="form-check-input"
-          type="radio"
-          name="inlineRadioOptions"
-          id="inlineRadio3"
-          value="option3"
-        />
-        <label class="form-check-label" for="inlineRadio3">High</label>
-      </div>
-    </div>
-    <mat-form-field>
-      <mat-label>Choose a date</mat-label>
-      <input matInput [matDatepicker]="picker">
-      <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-    <h4>mat select</h4> --> 
-    <!-- <mat-form-field>
-      <mat-label>Favorite animal</mat-label>
-      <mat-select [group]="animalControl" required>
-        <mat-option>--</mat-option>
-        <mat-option *ngFor="let animal of animals" [value]="animal">
-          {{animal.name}}
-        </mat-option>
-      </mat-select>
-      <mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error>
-      <mat-hint>{{animalControl.value?.sound}}</mat-hint>
-    </mat-form-field>     -->
-    <!-- <div>
-      <button id="submitButton" type="submit" class="btn btn-primary">
-        Submit
-      </button>
-    </div>
-  </form> -->
-
-  <!-- <div class="d-flex flex-column flex-md-row p-4 gap-4 py-md-5 align-items-center justify-content-center">
-    <div class="list-group">
-      <label class="list-group-item d-flex gap-3">
-        <input class="form-check-input flex-shrink-0" type="checkbox" value="" checked style="font-size: 1.375em;">
-        <span class="pt-1 form-checked-content">
-          <strong>Finish sales report</strong>
-          <small class="d-block text-body-secondary">
-            <svg class="bi me-1" width="1em" height="1em"><use xlink:href="#calendar-event"/></svg>
-            1:00–2:00pm
-          </small>
-        </span>
-      </label>
-      <label class="list-group-item d-flex gap-3">
-        <input class="form-check-input flex-shrink-0" type="checkbox" value="" style="font-size: 1.375em;">
-        <span class="pt-1 form-checked-content">
-          <strong>Weekly All Hands</strong>
-          <small class="d-block text-body-secondary">
-            <svg class="bi me-1" width="1em" height="1em"><use xlink:href="#calendar-event"/></svg>
-            2:00–2:30pm
-          </small>
-        </span>
-      </label>
-      <label class="list-group-item d-flex gap-3">
-        <input class="form-check-input flex-shrink-0" type="checkbox" value="" style="font-size: 1.375em;">
-        <span class="pt-1 form-checked-content">
-          <strong>Out of office</strong>
-          <small class="d-block text-body-secondary">
-            <svg class="bi me-1" width="1em" height="1em"><use xlink:href="#alarm"/></svg>
-            Tomorrow
-          </small>
-        </span>
-      </label>
-      <label class="list-group-item d-flex gap-3 bg-body-tertiary">
-        <input class="form-check-input form-check-input-placeholder bg-body-tertiary flex-shrink-0 pe-none" disabled type="checkbox" value="" style="font-size: 1.375em;">
-        <span class="pt-1 form-checked-content">
-          <span contenteditable="true" class="w-100">Add new task...</span>
-          <small class="d-block text-body-secondary">
-            <svg class="bi me-1" width="1em" height="1em"><use xlink:href="#list-check"/></svg>
-            Choose list...
-          </small>
-        </span>
-      </label>
-    </div>
-  </div> -->
-
   <hr />
   <div class="table-responsive">
     <table class="table">
       <thead>
         <tr>
           <th scope="col">Complete</th>
-          <th scope="col">Task</th>
+          <th scope="col">Task description</th>
           <th scope="col">Priority</th>
           <th scope="col">Due Date</th>
           <th scope="col">Edit</th>
@@ -133,7 +19,7 @@
           <td><input type="checkbox" [(ngModel)]="task.completed"></td>
           <td>{{ task.name }}</td>
           <td>{{ task.priority || 'N/A' }}</td>
-          <td>{{ task.dueDate ? task.dueDate.toDateString() : 'N/A' }}</td>
+          <td>{{ task.dueDate  }}</td>
           <td><button class="btn btn-primary" (click)="onEditTask(task)">Edit</button></td>
           <td><button class="btn btn-danger" (click)="onDeleteTask(task)">Delete</button></td>
         </tr>
@@ -141,57 +27,3 @@
     </table>
   </div>
 </div>
-
-<!-- <div class="container-fluid bg-light">
-  <div class="row mt-4" style="height: 500px">
-    <div class="col"></div>
-    <div class="col-md-6 bg-white shadow w-100">
-      <div class="card bg-gray mt-4 d-flex align-items-center">
-        <h4 class="text-white p-3 pt-1 pb-1">Add new task</h4>
-      </div>
-
-      <div class="shadow">
-        <div class="input-group p-4">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Enter task "
-            name="task"
-          />
-          <button class="btn btn-outline-success" type="button">+</button>
-        </div>
-      </div> -->
-
-<!-- <h4 class="text-primary mt-4">Tasks : </h4>
-
-                <div style="overflow-y: auto; height: 350px;">
-                    <div class="m-3" *ngFor="let task of taskArr">
-                        <div class="p-2 shadow border" id="tasks" >
-                            <div class="input-group row ps-3" >
-                                <div class="card col-md-10 border-0"> {{task.task_name}} </div>
-                                <button class="btn btn-outline-primary col me-2" data-bs-toggle="modal" type="button" data-bs-target="#exampleModal" (click)="call(task)" >e</button>
-                                <div class="btn btn-outline-danger col" (click)="deleteTask(task)" >X</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Task</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="input-group p-4">
-                                <input type="text" class="form-control" placeholder="Enter task " name="task" [(ngModel)]="editTaskValue">
-                                <button class="btn btn-outline-success" type="button" data-bs-dismiss="modal" (click)="editTask()">Update</button>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                </div> -->
-<!-- </div>
-    <div class="col"></div>
-  </div> -->

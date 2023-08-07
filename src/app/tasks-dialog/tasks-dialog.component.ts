@@ -1,15 +1,16 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GroupService, Task } from '../Group.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-tasks-dialog',
   templateUrl: './tasks-dialog.component.html',
 })
 export class TasksDialogComponent {
-  newTask: { priority?: string, dueDate?: Date, name: string, completed: boolean, group: number } = {
+  newTask: { priority?: string, dueDate: Date|null, name: string, completed: boolean, group: number } = {
     name: '',
     priority: '',
-    dueDate: undefined,
+    dueDate: null,
     completed: false,
     group: this.data.group.id
   };
@@ -36,11 +37,16 @@ export class TasksDialogComponent {
       this.groupService.addTask(this.data.group.id, task);
       // this.data.group.tasks.push(task);
       console.log('New task added:', task);
-    
+      //ToastrService.prototype.success('Task added successfully');
     }
   }
   toggleComplete(task: Task) {
     task.completed = !task.completed;
     this.groupService.updateTask(this.data.group.id, task);
+  }
+  deleteGroup() {
+    this.groupService.deleteGroup(this.data.group.id);
+    this.dialogRef.close();
+
   }
 }

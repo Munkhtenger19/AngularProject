@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Task } from '../Group.service';
+import { Custom_datePipe } from '../_pipe/custom_date.pipe';
 
 @Component({
   selector: 'app-edittaskdialog',

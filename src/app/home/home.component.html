@@ -159,19 +159,26 @@
     </button>
   </div>
 </div>
-<div>
 <mwl-calendar-month-view
   [viewDate]="viewDate"
   [events]="events"
+  [activeDayIsOpen]="true"
   (dayClicked)="dayClicked($event.day)"
-></mwl-calendar-month-view>
-</div>
-<!-- <div class="calendar-container">
-  <mwl-calendar
-    [view]="view"
-    [viewDate]="viewDate"
-    [events]="events"
-    [activeDayIsOpen]="activeDayIsOpen"
-    (dayClicked)="dayClicked($event.day)"
-  ></mwl-calendar>
-</div> -->
+>
+  <ng-template #cellTemplate let-day="day" let-view="view">
+    <div
+      class="card"
+      [class.bg-primary]="day.isToday"
+      [class.text-white]="day.isToday"
+      [class.border-primary]="day.isToday"
+      [class.border-0]="!day.isToday"
+    >
+      <div class="card-header">{{ day.date | date: 'd' }}</div>
+      <div class="card-body">
+        <div *ngFor="let event of day.events">
+          {{ event.title }}
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</mwl-calendar-month-view>

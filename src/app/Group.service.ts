@@ -76,6 +76,10 @@ export class GroupService {
     this.groups.push(group);
     localStorage.setItem('groups', JSON.stringify(this.groups));
   }
+  deleteGroup(groupIndex: number) {
+    this.groups.splice(groupIndex, 1);
+    localStorage.setItem('groups', JSON.stringify(this.groups));
+  }
 
   addTask(groupIndex: number, task: Task) {
     const groupX = this.groups.findIndex(group => group.id === groupIndex);
